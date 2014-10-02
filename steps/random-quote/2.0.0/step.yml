@@ -7,14 +7,15 @@ description: |
 website: https://github.com/bitrise-io/steps-random-quote
 source:
   git: https://github.com/bitrise-io/steps-random-quote.git
-  tag: 2.0.0
 host_os_tags:
   - osx-10.9
 type_tags:
   - funny
   - reward
+  - generator
 requires_admin_user: false
 
 outputs:
-  - title: A random quote
+  - title: |
+      A random quote
     mapped_to: RANDOM_QUOTE

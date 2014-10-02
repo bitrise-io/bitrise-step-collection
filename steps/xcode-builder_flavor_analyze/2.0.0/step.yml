@@ -1,24 +1,21 @@
-name: Xcode Build
+name: |
+  Xcode: Analyze
 description: |
-  Performs Xcode build, test, analyze or archive action, based on it's input.
+  Performs Xcode Analyze.
 website: https://github.com/bitrise-io/steps-xcode-builder
 source:
   git: https://github.com/bitrise-io/steps-xcode-builder.git
-  tag: 2.0.0
 host_os_tags:
   - osx-10.9
 type_tags:
   - xcode
-  - build
+  - analyze
 requires_admin_user: true
 
 inputs:
   - title: |
       Project file path (.xcodeproj or .xcworkspace), relative to the repository root.
     mapped_to: BITRISE_PROJECT_PATH
-    is_expand: true
-    default_value: |
-      ${BITRISE_PROJECT_PATH}
   - title: |
       Scheme in the Project to build
     mapped_to: BITRISE_SCHEME
@@ -28,6 +25,9 @@ inputs:
   - title: |
       Action Analyze: set it to 'true' to perform Xcode 'analyze' action
     mapped_to: BITRISE_ACTION_ANALYZE
+    default_value: |
+      true
+    is_readonly: true
   - title: |
       Action Archive: set it to 'true' to perform Xcode 'archive' action
     mapped_to: BITRISE_ACTION_ARCHIVE

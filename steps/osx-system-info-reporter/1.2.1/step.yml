@@ -1,0 +1,18 @@
+name: OS X System Information Reporter
+description: |
+  Reports base OS X System information like:
+
+  * OS version
+  * (active) Xcode version
+  * ruby version
+  * user environment
+  * and others
+website: https://github.com/bitrise-io/steps-system-info-reporter
+source:
+  git: https://github.com/bitrise-io/steps-system-info-reporter.git
+host_os_tags:
+  - osx-10.9
+type_tags:
+  - osx
+  - system
+requires_admin_user: false

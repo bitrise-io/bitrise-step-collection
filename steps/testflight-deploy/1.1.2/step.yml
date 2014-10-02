@@ -1,0 +1,48 @@
+name: TestFlight Deploy
+description: |
+  Bitrise step to deploy an iOS application to TestFlight.
+
+  You need to register on TestFlight's
+  website [https://www.testflightapp.com](https://www.testflightapp.com).
+
+  You also have to collect the required tokens.
+website: https://github.com/bitrise-io/step-testflight-deploy
+source:
+  git: https://github.com/bitrise-io/step-testflight-deploy.git
+host_os_tags:
+  - osx-10.9
+type_tags:
+  - deploy
+requires_admin_user: false
+
+inputs:
+  - title: |
+      Token to allow uploads via the API
+    mapped_to: TESTFLIGHT_API_TOKEN
+  - title: |
+      Token to access the Team where you will deploy to
+    mapped_to: TESTFLIGHT_TEAM_TOKEN
+  - title: |
+      (optional) Additional notes to the deploy. default = "Automatic build with Bitrise."
+    mapped_to: TESTFLIGHT_NOTES
+  - title: |
+      (optional) Sets if a notification should be sent of the deployment. True / False (default)
+    mapped_to: TESTFLIGHT_NOTIFY
+  - title: |
+      (optional) Sets if this deploy should replace the previous one. True / False (default)
+    mapped_to: TESTFLIGHT_REPLACE
+  - title: |
+      (optional) Distribution list
+    mapped_to: TESTFLIGHT_DISTRIBUTION_LIST
+
+
+outputs:
+  - title: |
+      Deployment result: 'success' or 'failed'
+    mapped_to: TESTFLIGHT_DEPLOY_STATUS
+  - title: |
+      Public URL of the newly deployed version
+    mapped_to: TESTFLIGHT_DEPLOY_INSTALL_URL
+  - title: |
+      URL of the config view
+    mapped_to: TESTFLIGHT_DEPLOY_CONFIG_URL

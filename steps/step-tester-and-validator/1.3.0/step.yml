@@ -10,7 +10,6 @@ description: |
 website: https://github.com/bitrise-io/steps-step-tester-and-validator
 source:
   git: https://github.com/bitrise-io/steps-step-tester-and-validator.git
-  tag: 1.3.0
 host_os_tags:
   - osx-10.9
 type_tags:

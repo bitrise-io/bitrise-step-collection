@@ -1,0 +1,37 @@
+name: Amazon S3 Bucket Sync
+description: |
+  Syncs the given local folder with an S3 bucket.
+
+  # Warning!
+
+  It will perform a one-direction sync, removing every file and folder from
+  the bucket which is not present in the local, input folder!
+website: https://github.com/bitrise-io/steps-amazon-s3-upload
+source:
+  git: https://github.com/bitrise-io/steps-amazon-s3-upload.git
+host_os_tags:
+  - osx-10.9
+type_tags:
+  - deploy
+  - upload
+  - uploader
+requires_admin_user: false
+
+inputs:
+  - title: |
+      AWS Access Key
+    mapped_to: AWS_ACCESS_KEY_ID
+  - title: |
+      AWS Secret Key
+    mapped_to: AWS_SECRET_ACCESS_KEY
+  - title: |
+      S3 Bucket Name
+    mapped_to: S3_UPLOAD_BUCKET
+  - title: |
+      Local path to upload. If you want to sync only the content of
+      the folder, but don't want to create the folder then you
+      should append a slash at the end of the path. Example: ./folder/
+    mapped_to: S3_UPLOAD_LOCAL_PATH
+  - title: |
+      Access Control: can be 'public-read' or 'private'. 'private' is the default.
+    mapped_to: S3_ACL_CONTROL

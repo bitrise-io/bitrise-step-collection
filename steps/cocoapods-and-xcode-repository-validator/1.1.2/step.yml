@@ -1,0 +1,26 @@
+---
+name: Run CocoaPods and gather information about Xcode projects.
+description: |
+  Run CocoaPods (pod install) and (optionally) gather information about Xcode project files.
+
+website: https://github.com/bitrise-io/steps-cocoapods-and-repository-validator
+source:
+  git: https://github.com/bitrise-io/steps-cocoapods-and-repository-validator.git
+host_os_tags:
+  - osx-10.9
+type_tags:
+  - xcode
+  - cocoapods
+  - pod
+requires_admin_user: false
+
+inputs:
+  - title: |
+      Source Code Directory path.
+    mapped_to: BITRISE_SOURCE_DIR
+  - title: |
+      Gather Projects (for validation)? - Leave it empty to don't gather projects.
+    mapped_to: GATHER_PROJECTS
+  - title: |
+      Directory of this Step - to find the helper bash scripts.
+    mapped_to: BITRISE_STEP_DIR
