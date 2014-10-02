@@ -65,7 +65,7 @@ def json_step_item_from_yaml_hash(yaml_hash)
     'name', 'description', 'website',
     'host_os_tags', 'type_tags', 'requires_admin_user'
     ])
-  whitelisted['source'] = whitelist_hash(yaml_hash['source'], ['git', 'tag'])
+  whitelisted['source'] = whitelist_hash(yaml_hash['source'], ['git'])
   if yaml_hash['inputs']
     whitelisted['inputs'] = yaml_hash['inputs'].map {|itm|
       itm['is_expand'] = true if itm['is_expand'].nil?
@@ -114,6 +114,7 @@ Find.find(options[:step_collection_folder]) do |path|
         steps_and_versions[stepid] = default_step_data_for_stepid(stepid)
       end
 
+      step_version_item['version_tag'] = stepver
       steps_and_versions[stepid][:versions] << step_version_item
     end
   end
@@ -126,8 +127,8 @@ steps_and_versions.each do |key, value|
   sorted_versions = []
   # puts "stepdata[:versions]: #{stepdata[:versions]}"
   sorted_versions = stepdata[:versions].sort do |a, b|
-    a_source_tag_ver = Gem::Version.new(a['source']['tag'])
-    b_source_tag_ver = Gem::Version.new(b['source']['tag'])
+    a_source_tag_ver = Gem::Version.new(a['version_tag'])
+    b_source_tag_ver = Gem::Version.new(b['version_tag'])
     case
     when a_source_tag_ver < b_source_tag_ver
       1
