@@ -17,6 +17,8 @@ inputs:
       Project file path (.xcodeproj or .xcworkspace), relative to the repository root.
     mapped_to: BITRISE_PROJECT_PATH
     is_expand: true
+    default_value: |
+      ${BITRISE_PROJECT_PATH}
   - title: |
       Scheme in the Project to build
     mapped_to: BITRISE_SCHEME
