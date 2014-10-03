@@ -1,0 +1,18 @@
+name: Git Clone Repository
+description: |
+  Clones a repository based on the provided inputs.
+
+  **NOTE**: it will remove the specified (local) Destination Directory before cloning!
+
+  If a git commit is provided it will ignore the tag and branch parameters.
+  If no git commit but a tag is provided then it will ignore the branch parameter.
+  Auth: if SSH private key parameter provided the other auth parameters will be ignored.
+website: https://github.com/bitrise-io/steps-git-clone
+source:
+  git: https://github.com/bitrise-io/steps-git-clone.git
+host_os_tags:
+  - osx-10.9
+type_tags:
+  - git
+  - vcs
+requires_admin_user: false

@@ -13,14 +13,3 @@ type_tags:
   - cocoapods
   - pod
 requires_admin_user: false
-
-inputs:
-  - title: |
-      Source Code Directory path.
-    mapped_to: BITRISE_SOURCE_DIR
-  - title: |
-      Gather Projects (for validation)? - Leave it empty to don't gather projects.
-    mapped_to: GATHER_PROJECTS
-  - title: |
-      Directory of this Step - to find the helper bash scripts.
-    mapped_to: BITRISE_STEP_DIR
