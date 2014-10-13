@@ -94,12 +94,14 @@ end
 # --- MAIN ---
 
 steplib_data = {
-  version: nil,
+  format_version: nil,
+  generated_at_timestamp: nil,
   steps: {}
 }
 
 steplib_info = SafeYAML.load_file(options[:steplib_info_file])
-steplib_data[:version] = steplib_info["version"]
+steplib_data[:format_version] = steplib_info["format_version"]
+steplib_data[:generated_at_timestamp] = Time.now.getutc.to_i
 
 steps_and_versions = {}
 Find.find(options[:step_collection_folder]) do |path|
