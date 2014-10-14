@@ -1,0 +1,24 @@
+---
+name: Set Environment Variable
+description: |
+  Define an Environment Variable, key and it's value for the upcoming Steps.
+  *Appends the environment variable into ~/.bash_profile*
+website: https://github.com/bitrise-io/steps-environment-variable
+source:
+  git: https://github.com/bitrise-io/steps-environment-variable.git
+host_os_tags:
+  - osx-10.9
+type_tags:
+  - environment
+requires_admin_user: false
+
+inputs:
+  - title: |
+      Environment Variable Key - without a dollar sign ($), just the name of the key, without spaces.
+      (All caps is recommended but not required).
+
+      Example: MY_VAR.
+    mapped_to: ENVIRONMENT_KEY
+  - title: |
+      Value - this will replace the key when you use the key with a leading dollar sign ($)
+    mapped_to: ENVIRONMENT_VALUE
