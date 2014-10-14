@@ -1,6 +1,6 @@
 name: Git Clone App Repository
 description: |
-  Clones the App repository.
+  Clones the App repository with the authentication settings you specified for your App.
 website: https://github.com/bitrise-io/steps-git-clone
 source:
   git: https://github.com/bitrise-io/steps-git-clone.git
