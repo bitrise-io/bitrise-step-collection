@@ -1,0 +1,12 @@
+name: Git Clone App Repository
+description: |
+  Clones the App repository.
+website: https://github.com/bitrise-io/steps-git-clone
+source:
+  git: https://github.com/bitrise-io/steps-git-clone.git
+host_os_tags:
+  - osx-10.9
+type_tags:
+  - git
+  - vcs
+requires_admin_user: false
