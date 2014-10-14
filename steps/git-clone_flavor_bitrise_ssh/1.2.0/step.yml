@@ -1,5 +1,5 @@
 name: |
-	Git Clone Repository (SSH key based authentication)
+    Git Clone Repository (SSH key based authentication)
 description: |
   Clones a repository based on the provided inputs.
 
