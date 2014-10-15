@@ -1,0 +1,14 @@
+---
+name: Run CocoaPods install
+description: |
+  Run CocoaPods install (`$ pod install`) in your App's directory.
+website: https://github.com/bitrise-io/steps-cocoapods-and-repository-validator
+source:
+  git: https://github.com/bitrise-io/steps-cocoapods-and-repository-validator.git
+host_os_tags:
+  - osx-10.9
+type_tags:
+  - xcode
+  - cocoapods
+  - pod
+requires_admin_user: false
