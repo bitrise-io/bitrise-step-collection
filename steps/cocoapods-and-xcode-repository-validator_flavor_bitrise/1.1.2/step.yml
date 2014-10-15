@@ -1,0 +1,15 @@
+---
+name: Run CocoaPods and gather information about Xcode projects.
+description: |
+  Run CocoaPods (pod install) and (optionally) gather information about Xcode project files.
+
+website: https://github.com/bitrise-io/steps-cocoapods-and-repository-validator
+source:
+  git: https://github.com/bitrise-io/steps-cocoapods-and-repository-validator.git
+host_os_tags:
+  - osx-10.9
+type_tags:
+  - xcode
+  - cocoapods
+  - pod
+requires_admin_user: false
