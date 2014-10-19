@@ -1,4 +1,4 @@
-bitrise-step-collection
+Bitrise Verified Step Collection
 =======================
 
 Bitrise's Verified Step Collection - a verified set of StepLib steps used on [Bitrise](http://www.bitrise.io/).
