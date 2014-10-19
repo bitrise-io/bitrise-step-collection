@@ -1,0 +1,22 @@
+name: Ping an URL with cURL
+description: |
+  Performs a [cURL](http://curl.haxx.se/) request on the given URL
+  and reports the result (success / failed) of the response.
+website: https://github.com/bitrise-io/steps-curl-ping
+source:
+  git: https://github.com/bitrise-io/steps-curl-ping.git
+host_os_tags:
+  - osx-10.9
+type_tags:
+  - web
+  - utils
+  - ping
+requires_admin_user: false
+
+inputs:
+  - title: |
+      Full URL
+    mapped_to: PING_URL
+  - title: |
+      (optional) cURL parameters (like: `-d 'key=some_data'`)
+    mapped_to: OPTIONAL_CURL_PARAMS
