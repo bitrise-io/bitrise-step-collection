@@ -2,8 +2,12 @@
 name: Deploy to Amazon S3
 description: |
   Deploy an Xcode archive to Amazon S3.
-  Required: an Xcode Archive Step (which generates the required IPA, dSYM and Plist files)
+  
+  **Required**: an Xcode Archive Step (which generates the required IPA, dSYM and Plist files)
   should run before this Step!
+
+  This Step requires an Amazon S3 registration.
+  To register an Amazon S3 account, [click here](http://aws.amazon.com/s3/).
 website: https://github.com/bitrise-io/steps-amazon-s3-deploy
 source:
   git: https://github.com/bitrise-io/steps-amazon-s3-deploy.git
