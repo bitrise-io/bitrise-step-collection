@@ -1,11 +1,14 @@
-name: Amazon S3 Bucket Sync (Upload only)
+name: Amazon S3 Bucket Sync
 description: |
   Syncs the given local folder with an S3 bucket.
+  
+  This Step requires an Amazon S3 registration.
+  To register an Amazon S3 account, [click here](http://aws.amazon.com/s3/).
 
   # Warning!
 
-  It will perform a **one-direction sync**, *removing every file and folder from
-  the S3 bucket which is not present in the local*, input folder!
+  It will perform a one-direction sync, removing every file and folder from
+  the bucket which is not present in the local, input folder!
 website: https://github.com/bitrise-io/steps-amazon-s3-upload
 source:
   git: https://github.com/bitrise-io/steps-amazon-s3-upload.git
