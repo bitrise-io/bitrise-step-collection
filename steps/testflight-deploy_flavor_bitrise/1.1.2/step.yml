@@ -1,14 +1,13 @@
 name: TestFlight Deploy
 description: |
-  Deploy your iOS app to TestFlight.
+  Bitrise step to deploy an iOS application to TestFlight.
 
-  *You have to include an Xcode Archive step before this step* to generate
-  the necessary app files!
+  You need to register an account on TestFlight's [website](https://www.testflightapp.com).
 
-  You need to register on TestFlight's
-  website [https://www.testflightapp.com](https://www.testflightapp.com).
-
-  You also have to collect the required tokens.
+  You also have to create the required tokens:
+  
+  * TestFlight API Token : on your **account page**, **Upload API** section. 
+  * Team Token: Click on your *app's team name* in the upper-right corner, edit info, and there is your **Team Token**.
 website: https://github.com/bitrise-io/step-testflight-deploy
 source:
   git: https://github.com/bitrise-io/step-testflight-deploy.git
