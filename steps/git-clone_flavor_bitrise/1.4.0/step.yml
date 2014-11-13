@@ -1,0 +1,35 @@
+name: Git Clone App Repository
+description: |
+  Clones the App repository.
+website: https://github.com/bitrise-io/steps-git-clone
+source:
+  git: https://github.com/bitrise-io/steps-git-clone.git
+host_os_tags:
+  - osx-10.9
+type_tags:
+  - git
+  - vcs
+requires_admin_user: false
+
+outputs:
+  - title: |
+      Cloned git commit's commit hash
+    mapped_to: GIT_CLONE_COMMIT_HASH
+  - title: |
+      Cloned git commit's message subject
+    mapped_to: GIT_CLONE_COMMIT_MESSAGE_SUBJECT
+  - title: |
+      Cloned git commit's message body
+    mapped_to: GIT_CLONE_COMMIT_MESSAGE_BODY
+  - title: |
+      Cloned git commit's author name
+    mapped_to: GIT_CLONE_COMMIT_AUTHOR_NAME
+  - title: |
+      Cloned git commit's author email address
+    mapped_to: GIT_CLONE_COMMIT_AUTHOR_EMAIL
+  - title: |
+      Cloned git commit's committer name
+    mapped_to: GIT_CLONE_COMMIT_COMMITER_NAME
+  - title: |
+      Cloned git commit's committer email
+    mapped_to: GIT_CLONE_COMMIT_COMMITER_EMAIL
