@@ -38,7 +38,7 @@ opt_parser.parse!
 unless options[:output_file_path]
   puts "[!] Output JSON File Path is missing"
   puts opt_parser
-  exit
+  exit 1
 end
 
 puts "--- Config:"
