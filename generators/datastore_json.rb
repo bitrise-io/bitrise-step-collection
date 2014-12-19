@@ -9,11 +9,17 @@ require "safe_yaml/load"
 require 'optparse'
 require 'json'
 
+def env_or_default(env_key, default_value)
+  env_val = ENV[env_key]
+  return env_val if env_val
+  return default_value
+end
 
 options = {
   output_file_path: nil,
-  steplib_info_file: "../steplib.yml",
-  step_collection_folder: "../steps"
+  steplib_info_file: env_or_default('STEPLIB_INFO_FILE_PATH', '../steplib.yml'),
+  step_collection_folder: env_or_default('STEPS_FOLDER_PATH', '../steps'),
+  step_assets_url_root: env_or_default('STEP_ASSETS_URL_ROOT', 'https://github.com/bitrise-io/bitrise-step-collection/tree/master/steps')
 }
 opt_parser = OptionParser.new do |opt|
   opt.banner = "Usage: generate_steplib_json.rb [OPTIONS]"
@@ -117,6 +123,10 @@ Find.find(options[:step_collection_folder]) do |path|
       end
 
       step_version_item['version_tag'] = stepver
+      step_icon_file_path_256 = File.join(options[:step_collection_folder], stepid, 'assets', 'icon_256.png')
+      if File.exist?(step_icon_file_path_256)
+        step_version_item['icon_url_256'] = "#{options[:step_assets_url_root]}/#{stepid}/assets/icon_256.png"
+      end
       steps_and_versions[stepid][:versions] << step_version_item
     end
   end
