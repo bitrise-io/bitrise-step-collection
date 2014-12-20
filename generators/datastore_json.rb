@@ -9,9 +9,17 @@ require "safe_yaml/load"
 require 'optparse'
 require 'json'
 
+# --- StepLib Collection specific options
+DEFAULT_step_assets_url_root = 'https://github.com/bitrise-io/bitrise-step-collection/tree/master/steps'
+DEFAULT_steplib_source = 'https://github.com/bitrise-io/bitrise-step-collection'
+# ---
+
+
 def env_or_default(env_key, default_value)
   env_val = ENV[env_key]
-  return env_val if env_val
+  if env_val
+    return env_val 
+  end
   return default_value
 end
 
@@ -19,7 +27,8 @@ options = {
   output_file_path: nil,
   steplib_info_file: env_or_default('STEPLIB_INFO_FILE_PATH', '../steplib.yml'),
   step_collection_folder: env_or_default('STEPS_FOLDER_PATH', '../steps'),
-  step_assets_url_root: env_or_default('STEP_ASSETS_URL_ROOT', 'https://github.com/bitrise-io/bitrise-step-collection/tree/master/steps')
+  step_assets_url_root: env_or_default('STEP_ASSETS_URL_ROOT', DEFAULT_step_assets_url_root),
+  steplib_source: env_or_default('STEPLIB_SOURCE', DEFAULT_steplib_source)
 }
 opt_parser = OptionParser.new do |opt|
   opt.banner = "Usage: generate_steplib_json.rb [OPTIONS]"
@@ -41,8 +50,22 @@ opt_parser = OptionParser.new do |opt|
 end
 opt_parser.parse!
 
-unless options[:output_file_path]
-  puts "[!] Output JSON File Path is missing"
+def check_required_options!(opts_to_check)
+  is_fail = false
+  opts_to_check.each do |opt_key, opt_value|
+    if opt_value.nil?
+      puts "[!] Required input missing: #{opt_key}"
+      is_fail = true
+    end
+  end
+
+  if is_fail
+    yield
+  end
+end
+
+check_required_options!(options) do
+  puts
   puts opt_parser
   exit 1
 end
@@ -108,6 +131,7 @@ steplib_data = {
 steplib_info = SafeYAML.load_file(options[:steplib_info_file])
 steplib_data[:format_version] = steplib_info["format_version"]
 steplib_data[:generated_at_timestamp] = Time.now.getutc.to_i
+steplib_data[:steplib_source] = options[:steplib_source]
 
 steps_and_versions = {}
 Find.find(options[:step_collection_folder]) do |path|
@@ -122,6 +146,7 @@ Find.find(options[:step_collection_folder]) do |path|
         steps_and_versions[stepid] = default_step_data_for_stepid(stepid)
       end
 
+      step_version_item['steplib_source'] = options[:steplib_source]
       step_version_item['version_tag'] = stepver
       step_icon_file_path_256 = File.join(options[:step_collection_folder], stepid, 'assets', 'icon_256.png')
       if File.exist?(step_icon_file_path_256)
