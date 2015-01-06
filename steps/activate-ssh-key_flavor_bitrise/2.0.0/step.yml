@@ -18,4 +18,4 @@ host_os_tags:
   - osx-10.9
 type_tags:
   - ssh
-requires_admin_user: false
+is_requires_admin_user: false

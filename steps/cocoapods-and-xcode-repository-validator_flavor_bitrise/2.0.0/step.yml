@@ -13,7 +13,7 @@ type_tags:
   - xcode
   - cocoapods
   - pod
-requires_admin_user: false
+is_requires_admin_user: false
 
 inputs:
   - title: |

@@ -10,7 +10,7 @@ host_os_tags:
 type_tags:
   - xcode
   - archive
-requires_admin_user: true
+is_requires_admin_user: true
 
 inputs:
   - title: |

@@ -11,7 +11,7 @@ host_os_tags:
 type_tags:
   - ftp
   - uploader
-requires_admin_user: false
+is_requires_admin_user: false
 
 inputs:
   - title: |

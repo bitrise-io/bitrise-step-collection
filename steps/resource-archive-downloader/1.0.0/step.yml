@@ -10,7 +10,7 @@ type_tags:
   - resource
   - zip
   - downloader
-requires_admin_user: false
+is_requires_admin_user: false
 
 inputs:
   - title: |
