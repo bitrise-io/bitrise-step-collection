@@ -76,7 +76,11 @@ puts "-----------"
 
 # --- UTILS ---
 
-def whitelist_hash(inhash, whitelist)
+#
+# All the input whitelist keys have to be defined
+# and the returned hash will only contain the
+#  whitelisted key-value pairs.
+def whitelist_require_hash(inhash, whitelist)
   raise "Input hash is nil" if inhash.nil?
 
   res_hash = {}
@@ -89,23 +93,71 @@ def whitelist_hash(inhash, whitelist)
   return res_hash
 end
 
+#
+# Sets the provided default value for the specified
+#  key if the key is missing.
+# Defaults_arr is an array of {:key=>,:value=>} hashes
+def set_missing_defaults(inhash, defaults_arr)
+  defaults_arr.each do |a_def|
+    a_def_key = a_def[:key]
+    a_def_value = a_def[:value]
+    if inhash[a_def_key].nil?
+      inhash[a_def_key] = a_def_value
+    end
+  end
+  return inhash
+end
+
 def json_step_item_from_yaml_hash(yaml_hash)
-  whitelisted = whitelist_hash(yaml_hash, [
-    'name', 'description', 'website',
-    'host_os_tags', 'type_tags', 'requires_admin_user'
+  # set default values for optional properties
+  whitelisted = set_missing_defaults(yaml_hash, [
+    {key: 'fork_url', value: yaml_hash['website']},
+    {key: 'project_type_tags', value: []}
     ])
-  whitelisted['source'] = whitelist_hash(yaml_hash['source'], ['git'])
+  # 
+  whitelisted = whitelist_require_hash(whitelisted, [
+    'name', 'description',
+    'website', 'fork_url',
+    'host_os_tags', 'project_type_tags', 'type_tags',
+    'is_requires_admin_user'
+    ])
+  #
+  whitelisted['source'] = whitelist_require_hash(yaml_hash['source'], ['git'])
   if yaml_hash['inputs']
     whitelisted['inputs'] = yaml_hash['inputs'].map {|itm|
-      itm['is_expand'] = true if itm['is_expand'].nil?
-      whitelist_hash(itm, ['title', 'mapped_to', 'is_expand'])
+      whitelisted_itm = set_missing_defaults(itm, [
+        {key: 'is_expand', value: true},
+        {key: 'description', value: ''},
+        {key: 'is_required', value: false},
+        {key: 'value_options', value: []},
+        {key: 'value', value: ''},
+        {key: 'is_dont_change_value', value: false}
+        ])
+      whitelisted_itm = whitelist_require_hash(whitelisted_itm,
+        ['title', 'description', 'mapped_to', 'is_expand',
+          'is_required', 'value_options', 'value', 'is_dont_change_value'])
+      if whitelisted_itm['value_options'].length == 0
+        whitelisted_itm['value_options'] = nil
+      else
+        # force to-string
+        whitelisted_itm['value_options'] = whitelisted_itm['value_options'].map { |e| e.to_s }
+      end
+      whitelisted_itm['value'] = whitelisted_itm['value'].to_s
+      # return:
+      whitelisted_itm
     }
   else
     whitelisted['inputs'] = []
   end
 
   if yaml_hash['outputs']
-    whitelisted['outputs'] = yaml_hash['outputs'].map {|itm| whitelist_hash(itm, ['title', 'mapped_to'])}
+    whitelisted['outputs'] = yaml_hash['outputs'].map { |itm|
+      whitelisted_itm = set_missing_defaults(itm, [
+        {key: 'description', value: ''}
+        ])
+      # return:
+      whitelist_require_hash(itm, ['title', 'description', 'mapped_to'])
+    }
   else
     whitelisted['outputs'] = []
   end
@@ -140,6 +192,8 @@ Find.find(options[:step_collection_folder]) do |path|
   else
     if match = path.match(/steps\/([a-zA-z0-9-]*)\/([0-9]*\.[0-9]*\.[0-9]*)\/step.yml\z/)
       stepid, stepver = match.captures
+      raise 'Cant determine StepID' if stepid.nil?
+      raise 'Cant determine Step Version' if stepver.nil?
       step_version_item = json_step_item_from_yaml_hash(SafeYAML.load_file(path))
 
       unless steps_and_versions[stepid]
@@ -148,6 +202,7 @@ Find.find(options[:step_collection_folder]) do |path|
 
       step_version_item['steplib_source'] = options[:steplib_source]
       step_version_item['version_tag'] = stepver
+      step_version_item['id'] = stepid
       step_icon_file_path_256 = File.join(options[:step_collection_folder], stepid, 'assets', 'icon_256.png')
       if File.exist?(step_icon_file_path_256)
         step_version_item['icon_url_256'] = "#{options[:step_assets_url_root]}/#{stepid}/assets/icon_256.png"
