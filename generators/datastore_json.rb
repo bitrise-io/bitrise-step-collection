@@ -8,6 +8,7 @@ require 'find'
 require "safe_yaml/load"
 require 'optparse'
 require 'json'
+require 'steplib_validator'
 
 # --- StepLib Collection specific options
 DEFAULT_step_assets_url_root = 'https://github.com/bitrise-io/bitrise-step-collection/tree/master/steps'
@@ -163,23 +164,23 @@ end
 
 def default_step_data_for_stepid(stepid)
   return  {
-    id: stepid,
-    versions: []
+    'id' => stepid,
+    'versions' => []
   }
 end
 
 # --- MAIN ---
 
 steplib_data = {
-  format_version: nil,
-  generated_at_timestamp: nil,
-  steps: {}
+  'format_version' => nil,
+  'generated_at_timestamp' => nil,
+  'steps' => {}
 }
 
 steplib_info = SafeYAML.load_file(options[:steplib_info_file])
-steplib_data[:format_version] = steplib_info["format_version"]
-steplib_data[:generated_at_timestamp] = Time.now.getutc.to_i
-steplib_data[:steplib_source] = options[:steplib_source]
+steplib_data['format_version'] = steplib_info["format_version"]
+steplib_data['generated_at_timestamp'] = Time.now.getutc.to_i
+steplib_data['steplib_source'] = options[:steplib_source]
 
 steps_and_versions = {}
 Find.find(options[:step_collection_folder]) do |path|
@@ -203,7 +204,7 @@ Find.find(options[:step_collection_folder]) do |path|
       if File.exist?(step_icon_file_path_256)
         step_version_item['icon_url_256'] = "#{options[:step_assets_url_root]}/#{stepid}/assets/icon_256.png"
       end
-      steps_and_versions[stepid][:versions] << step_version_item
+      steps_and_versions[stepid]['versions'] << step_version_item
     end
   end
 end
@@ -214,7 +215,7 @@ steps_and_versions.each do |key, value|
   stepdata = value
   sorted_versions = []
   # puts "stepdata[:versions]: #{stepdata[:versions]}"
-  sorted_versions = stepdata[:versions].sort do |a, b|
+  sorted_versions = stepdata['versions'].sort do |a, b|
     a_source_tag_ver = Gem::Version.new(a['version_tag'])
     b_source_tag_ver = Gem::Version.new(b['version_tag'])
     case
@@ -227,14 +228,16 @@ steps_and_versions.each do |key, value|
     end
   end
 
-  stepdata[:versions] = sorted_versions
-  stepdata[:latest] = sorted_versions.first
-  steplib_data[:steps][stepid] = stepdata
+  stepdata['versions'] = sorted_versions
+  stepdata['latest'] = sorted_versions.first
+  steplib_data['steps'][stepid] = stepdata
 end
 
-# Gem::Version.new('0.4')
 
-puts " steplib_data: #{steplib_data.to_json}"
+slib_validator = SteplibValidator.new(steplib_data)
+slib_validator.validate!
+
+puts " (i) steplib_data JSON: #{steplib_data.to_json}"
 
 # write to file
 File.open(options[:output_file_path], "w") do |f|
