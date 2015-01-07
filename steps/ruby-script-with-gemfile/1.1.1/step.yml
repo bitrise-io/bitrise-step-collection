@@ -11,7 +11,7 @@ type_tags:
   - runner
   - script
   - glue
-requires_admin_user: true
+is_requires_admin_user: true
 
 inputs:
   - title: |

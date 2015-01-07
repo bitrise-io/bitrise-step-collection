@@ -13,7 +13,7 @@ type_tags:
   - funny
   - reward
   - generator
-requires_admin_user: false
+is_requires_admin_user: false
 
 outputs:
   - title: |

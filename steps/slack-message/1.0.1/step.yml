@@ -18,7 +18,7 @@ host_os_tags:
 type_tags:
   - IM
   - notification
-requires_admin_user: false
+is_requires_admin_user: false
 
 inputs:
   - title: |

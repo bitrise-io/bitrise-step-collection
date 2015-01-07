@@ -13,7 +13,7 @@ host_os_tags:
   - osx-10.9
 type_tags:
   - security
-requires_admin_user: true
+is_requires_admin_user: true
 
 inputs:
   - title: |

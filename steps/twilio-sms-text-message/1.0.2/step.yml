@@ -17,7 +17,7 @@ type_tags:
   - messaging
   - sms
   - text message
-requires_admin_user: false
+is_requires_admin_user: false
 
 inputs:
   - title: |
