@@ -25,7 +25,7 @@ inputs:
     title: "Git repository URL"
     mapped_to: GIT_REPOSITORY_URL
     is_required: true
-    is_expand: false
+    is_expand: true
     value: "$GIT_REPOSITORY_URL"
   - 
     title: "Git Commit to clone"
@@ -47,14 +47,26 @@ inputs:
     is_expand: true
     value: "$BITRISE_SOURCE_DIR"
   - 
-    title: "Auth: SSH private key - without a passphrase!"
-    mapped_to: AUTH_SSH_PRIVATE_KEY
+    title: "Auth: Username"
+    mapped_to: AUTH_USER
     is_expand: false
     value: ""
+    is_dont_change_value: true
+  - 
+    title: "Auth: Password"
+    mapped_to: AUTH_PASSWORD
+    is_expand: false
+    value: ""
+    is_dont_change_value: true
+  - 
+    title: "Auth: SSH private key - without a passphrase!"
+    mapped_to: AUTH_SSH_PRIVATE_KEY
+    is_expand: true
+    value: "$SSH_RSA_PRIVATE_KEY"
   - 
     title: "Auth: Base64 (strict - RFC 4648) encoded SSH private key - without a passphrase!"
     mapped_to: AUTH_SSH_PRIVATE_KEY_BASE64
-    is_expand: false
+    is_expand: true
     value: ""
   - 
     title: "Generate a Formatted (markdown) output file to this path"
