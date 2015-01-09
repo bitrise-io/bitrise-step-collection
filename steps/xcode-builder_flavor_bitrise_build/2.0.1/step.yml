@@ -102,7 +102,6 @@ inputs:
     title: "Build Tool"
     description: |
       "xcodebuild" is the default; "xctool" is supported;
-      BITRISE_ACTION_ARCHIVE and BITRISE_ACTION_UNITTEST can only use "xcodebuild"
     value_options:
       - "xcodebuild"
       - "xctool"
