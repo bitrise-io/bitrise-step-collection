@@ -8,7 +8,7 @@ require 'find'
 require "safe_yaml/load"
 require 'optparse'
 require 'json'
-require 'steplib_validator'
+require 'steplib'
 
 # --- StepLib Collection specific options
 DEFAULT_step_assets_url_root = 'https://github.com/bitrise-io/bitrise-step-collection/tree/master/steps'
@@ -233,9 +233,8 @@ steps_and_versions.each do |key, value|
   steplib_data['steps'][stepid] = stepdata
 end
 
-
-slib_validator = SteplibValidator.new(steplib_data)
-slib_validator.validate!
+# validate the generated data's format
+Steplib::SteplibValidator.validate_steplib!(steplib_data)
 
 puts " (i) steplib_data JSON: #{steplib_data.to_json}"
 
