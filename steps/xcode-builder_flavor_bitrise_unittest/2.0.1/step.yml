@@ -28,7 +28,7 @@ inputs:
     title: "Scheme"
     description: |
       Scheme name in the Project to build
-    is_expand: false
+    is_expand: true
     is_required: true
     value: "$BITRISE_SCHEME"
     is_dont_change_value: true
