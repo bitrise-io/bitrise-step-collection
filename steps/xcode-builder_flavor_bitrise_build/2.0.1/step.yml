@@ -19,6 +19,7 @@ inputs:
     title: "Project file path"
     description: |
       .xcodeproj or .xcworkspace file path, relative to the repository root.
+    is_expand: true
     is_required: true
     value: "$BITRISE_PROJECT_PATH"
     is_dont_change_value: true
@@ -27,6 +28,7 @@ inputs:
     title: "Scheme"
     description: |
       Scheme name in the Project to build
+    is_expand: false
     is_required: true
     value: "$BITRISE_SCHEME"
     is_dont_change_value: true
@@ -35,6 +37,9 @@ inputs:
     title: "Action: Build?"
     description: |
       Set it to 'true' to perform Xcode 'build' action
+    is_expand: false
+    is_required: true
+    value_options: ["", "true"]
     value: "true"
     is_dont_change_value: true
     mapped_to: BITRISE_ACTION_BUILD
@@ -42,6 +47,9 @@ inputs:
     title: "Action: Analyze?"
     description: |
       Set it to 'true' to perform Xcode 'analyze' action
+    is_expand: false
+    is_required: true
+    value_options: ["", "true"]
     value: ""
     is_dont_change_value: true
     mapped_to: BITRISE_ACTION_ANALYZE
@@ -49,6 +57,9 @@ inputs:
     title: "Action: Archive?"
     description: |
       Set it to 'true' to perform Xcode 'archive' action
+    is_expand: false
+    is_required: true
+    value_options: ["", "true"]
     value: ""
     is_dont_change_value: true
     mapped_to: BITRISE_ACTION_ARCHIVE
@@ -56,6 +67,9 @@ inputs:
     title: "Action: UnitTest?"
     description: |
       Set it to 'true' to perform Xcode 'test' action
+    is_expand: false
+    is_required: true
+    value_options: ["", "true"]
     value: ""
     is_dont_change_value: true
     mapped_to: BITRISE_ACTION_UNITTEST
@@ -64,6 +78,7 @@ inputs:
     description: |
       .p12 Private Key file's URL
     is_required: true
+    is_expand: true
     value: "$BITRISE_CERTIFICATE_URL"
     is_dont_change_value: true
     mapped_to: BITRISE_CERTIFICATE_URL
@@ -72,12 +87,14 @@ inputs:
     description: |
       .p12 Private Key file's Passphrase
     is_required: true
+    is_expand: true
     value: "$BITRISE_CERTIFICATE_PASSPHRASE"
     is_dont_change_value: true
     mapped_to: BITRISE_CERTIFICATE_PASSPHRASE
   - 
     title: "Provisioning Profile URL"
     is_required: true
+    is_expand: true
     value: "$BITRISE_PROVISION_URL"
     is_dont_change_value: true
     mapped_to: BITRISE_PROVISION_URL
@@ -90,6 +107,8 @@ inputs:
       - "xcodebuild"
       - "xctool"
     value: "xcodebuild"
+    is_expand: false
+    is_required: true
     mapped_to: BITRISE_BUILD_TOOL
   - 
     title: "Xcode Version to use"
@@ -105,6 +124,7 @@ inputs:
       For other simulator devices set it as it is shown in
       Xcode's device selection dropdown UI.
     value: "iPad"
+    is_expand: false
     is_dont_change_value: true
     mapped_to: UNITTEST_PLATFORM_NAME
 outputs:
