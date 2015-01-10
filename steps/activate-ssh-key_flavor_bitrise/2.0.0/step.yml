@@ -1,6 +1,5 @@
 ---
-name: |
-  Activate App SSH key
+name: "Activate App SSH key"
 description: |
   Saves the provided **RSA private SSH key** to file
   and then loads it into the user's ssh-agent with `ssh-add`.
@@ -12,10 +11,33 @@ description: |
 
   It will start the ssh-agent if it can't connect to the agent.
 website: https://github.com/bitrise-io/steps-activate-ssh-key
+fork_url: https://github.com/bitrise-io/steps-activate-ssh-key
 source:
   git: https://github.com/bitrise-io/steps-activate-ssh-key.git
 host_os_tags:
   - osx-10.9
+  - osx-10.10
 type_tags:
   - ssh
 is_requires_admin_user: false
+inputs:
+  - 
+    title: "SSH private key in RSA format"
+    mapped_to: SSH_RSA_PRIVATE_KEY
+    is_expand: true
+    is_required: true
+    value: "$SSH_RSA_PRIVATE_KEY"
+    is_dont_change_value: true
+  - 
+    title: "Path to save the private key"
+    mapped_to: SSH_KEY_SAVE_PATH
+    is_expand: true
+    value: "$HOME/.ssh/steplib_ssh_step_id_rsa"
+    is_dont_change_value: true
+  - 
+    title: "Remove other, previously loaded keys and restart ssh-agent?"
+    mapped_to: IS_REMOVE_OTHER_IDENTITIES
+    is_expand: false
+    value_options: ["true", "false"]
+    value: "true"
+    is_dont_change_value: true

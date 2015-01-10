@@ -1,35 +1,105 @@
-name: Git Clone App Repository
+name: "Git Clone Repository"
 description: |
   Clones the App repository.
 website: https://github.com/bitrise-io/steps-git-clone
+fork_url: https://github.com/bitrise-io/steps-git-clone
 source:
   git: https://github.com/bitrise-io/steps-git-clone.git
 host_os_tags:
   - osx-10.9
+  - osx-10.10
 type_tags:
   - git
   - vcs
 is_requires_admin_user: false
-
+inputs:
+  - 
+    title: "Git repository URL"
+    mapped_to: GIT_REPOSITORY_URL
+    is_required: true
+    is_expand: true
+    value: "$GIT_REPOSITORY_URL"
+    is_dont_change_value: true
+  - 
+    title: "Git Commit to clone"
+    mapped_to: BITRISE_GIT_COMMIT
+    is_expand: true
+    value: "$BITRISE_GIT_COMMIT"
+    is_dont_change_value: true
+  - 
+    title: "Git Tag to clone"
+    mapped_to: BITRISE_GIT_TAG
+    is_expand: true
+    value: "$BITRISE_GIT_TAG"
+    is_dont_change_value: true
+  - 
+    title: "Git Branch to clone"
+    mapped_to: BITRISE_GIT_BRANCH
+    is_expand: true
+    value: "$BITRISE_GIT_BRANCH"
+    is_dont_change_value: true
+  - 
+    title: "Clone destination (local) directory path"
+    mapped_to: BITRISE_SOURCE_DIR
+    is_expand: true
+    value: "$BITRISE_SOURCE_DIR"
+    is_dont_change_value: true
+  - 
+    title: "Auth: Username"
+    mapped_to: AUTH_USER
+    is_expand: false
+    value: ""
+    is_dont_change_value: true
+  - 
+    title: "Auth: Password"
+    mapped_to: AUTH_PASSWORD
+    is_expand: false
+    value: ""
+    is_dont_change_value: true
+  - 
+    title: "Auth: SSH private key - without a passphrase!"
+    mapped_to: AUTH_SSH_PRIVATE_KEY
+    is_expand: true
+    value: "$SSH_RSA_PRIVATE_KEY"
+    is_dont_change_value: true
+  - 
+    title: "Auth: Base64 (strict - RFC 4648) encoded SSH private key - without a passphrase!"
+    mapped_to: AUTH_SSH_PRIVATE_KEY_BASE64
+    is_expand: true
+    value: ""
+    is_dont_change_value: true
+  - 
+    title: "Generate a Formatted (markdown) output file to this path"
+    mapped_to: GIT_CLONE_FORMATTED_OUTPUT_FILE_PATH
+    is_expand: true
+    value: "$BITRISE_STEP_FORMATTED_OUTPUT_FILE_PATH"
+    is_dont_change_value: true
+  - 
+    title: "[optional] Is export outputs."
+    mapped_to: GIT_CLONE_IS_EXPORT_OUTPUTS
+    value_options: ["true", "false"]
+    value: "true"
+    is_expand: false
+    is_dont_change_value: true
 outputs:
-  - title: |
-      Cloned git commit's commit hash
+  - 
+    title: "Cloned git commit's commit hash"
     mapped_to: GIT_CLONE_COMMIT_HASH
-  - title: |
-      Cloned git commit's message subject
+  -
+    title: "Cloned git commit's message subject"
     mapped_to: GIT_CLONE_COMMIT_MESSAGE_SUBJECT
-  - title: |
-      Cloned git commit's message body
+  - 
+    title: "Cloned git commit's message body"
     mapped_to: GIT_CLONE_COMMIT_MESSAGE_BODY
-  - title: |
-      Cloned git commit's author name
+  - 
+    title: "Cloned git commit's author name"
     mapped_to: GIT_CLONE_COMMIT_AUTHOR_NAME
-  - title: |
-      Cloned git commit's author email address
+  - 
+    title: "Cloned git commit's author email address"
     mapped_to: GIT_CLONE_COMMIT_AUTHOR_EMAIL
-  - title: |
-      Cloned git commit's committer name
+  - 
+    title: "Cloned git commit's committer name"
     mapped_to: GIT_CLONE_COMMIT_COMMITER_NAME
-  - title: |
-      Cloned git commit's committer email
+  - 
+    title: "Cloned git commit's committer email"
     mapped_to: GIT_CLONE_COMMIT_COMMITER_EMAIL
