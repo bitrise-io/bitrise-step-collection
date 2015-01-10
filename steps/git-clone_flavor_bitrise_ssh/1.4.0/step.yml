@@ -31,6 +31,7 @@ inputs:
     title: "Git Commit to clone"
     mapped_to: BITRISE_GIT_COMMIT
     is_expand: true
+    value: ""
   - 
     title: "Git Tag to clone"
     mapped_to: BITRISE_GIT_TAG

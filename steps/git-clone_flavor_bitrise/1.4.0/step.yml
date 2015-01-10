@@ -24,19 +24,19 @@ inputs:
     title: "Git Commit to clone"
     mapped_to: BITRISE_GIT_COMMIT
     is_expand: true
-    value: ""
+    value: "$BITRISE_GIT_COMMIT"
     is_dont_change_value: true
   - 
     title: "Git Tag to clone"
     mapped_to: BITRISE_GIT_TAG
     is_expand: true
-    value: ""
+    value: "$BITRISE_GIT_TAG"
     is_dont_change_value: true
   - 
     title: "Git Branch to clone"
     mapped_to: BITRISE_GIT_BRANCH
     is_expand: true
-    value: ""
+    value: "$BITRISE_GIT_BRANCH"
     is_dont_change_value: true
   - 
     title: "Clone destination (local) directory path"
