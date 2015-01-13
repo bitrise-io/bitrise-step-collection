@@ -29,7 +29,8 @@ options = {
   steplib_info_file: env_or_default('STEPLIB_INFO_FILE_PATH', '../steplib.yml'),
   step_collection_folder: env_or_default('STEPS_FOLDER_PATH', '../steps'),
   step_assets_url_root: env_or_default('STEP_ASSETS_URL_ROOT', DEFAULT_step_assets_url_root),
-  steplib_source: env_or_default('STEPLIB_SOURCE', DEFAULT_steplib_source)
+  steplib_source: env_or_default('STEPLIB_SOURCE', DEFAULT_steplib_source),
+  is_pretty_json: false
 }
 opt_parser = OptionParser.new do |opt|
   opt.banner = "Usage: generate_steplib_json.rb [OPTIONS]"
@@ -42,6 +43,10 @@ opt_parser = OptionParser.new do |opt|
 
   opt.on("-d", "--stepdir STEPS_DIR", "Steps folder path (default is #{options[:step_collection_folder]})") do |value|
     options[:step_collection_folder] = value
+  end
+
+  opt.on("-p", "--pretty", "Pretty JSON generation") do |value|
+    options[:is_pretty_json] = true
   end
 
   opt.on("-h","--help","help") do
@@ -167,9 +172,15 @@ end
 # validate the generated data's format
 Steplib::SteplibValidator.validate_steplib!(steplib_data)
 
-puts " (i) steplib_data JSON: #{steplib_data.to_json}"
+serialized_json_str = ""
+if options[:is_pretty_json]
+  serialized_json_str = JSON.pretty_generate(steplib_data)
+else
+  serialized_json_str = JSON.generate(steplib_data)
+end
+puts " (i) serialized_json_str JSON: #{serialized_json_str}"
 
 # write to file
 File.open(options[:output_file_path], "w") do |f|
-  f.write(steplib_data.to_json)
+  f.write(serialized_json_str)
 end
