@@ -39,8 +39,10 @@ inputs:
     mapped_to: SLACK_FROM_NAME
     is_expand: false
     is_required: true
+    value: "Bitrise"
   -
     title: "The message you want to send."
     mapped_to: SLACK_MESSAGE_TEXT
     is_expand: true
     is_required: true
+    value: "Build URL: ${BITRISE_BUILD_URL}"
