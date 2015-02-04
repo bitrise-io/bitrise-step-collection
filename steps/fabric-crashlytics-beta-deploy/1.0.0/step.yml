@@ -1,0 +1,120 @@
+name: "Fabric / Crashlytics deployer"
+description: |
+  Deploys to Fabric / Crashlytics beta testing service.
+
+  ## How to setup your Xcode project for [Fabric](https://get.fabric.io/) / Crashlytics beta testing?
+
+  * Register a Fabric account at [https://get.fabric.io/](https://get.fabric.io/).
+  * Add Fabric & Crashlytics to your Xcode project as described when you first sign into your Fabric account
+  * After your first Fabric & Crashlytics app setup the app should be listed on [https://fabric.io](https://fabric.io)
+  * You should also test that everything works correctly with a manual version upload: just Create an Archive in Xcode and if the Fabric menu bar app is running it'll show an upload popup
+
+  Your app is now ready to be deployed with this Step!
+website: https://github.com/bitrise-io/steps-fabric-crashlytics-beta-deploy
+fork_url: https://github.com/bitrise-io/steps-fabric-crashlytics-beta-deploy
+source:
+  git: https://github.com/bitrise-io/steps-fabric-crashlytics-beta-deploy.git
+host_os_tags:
+  - "osx-10.10"
+project_type_tags:
+  - "ios"
+type_tags:
+  - "deploy"
+is_requires_admin_user: false
+inputs:
+  -
+    mapped_to: STEP_CRASHLYTICS_API_KEY
+    title: "Fabric: API Key"
+    description: |
+      You can get your API Key under **Organizations**
+      at [https://fabric.io/settings](https://fabric.io/settings).
+
+      Select the organization your app belongs to
+      and at the top you'll see a text: **API Key**.
+      Click it and the API key will appear.
+    is_required: true
+    is_expand: false
+  -
+    mapped_to: STEP_CRASHLYTICS_BUILD_SECRET
+    title: "Fabric: Build Secret"
+    description: |
+      You can get the Build Secret key on the same
+      page as the API Key.
+
+      Select the **Organizations** option
+      at [https://fabric.io/settings](https://fabric.io/settings).
+
+      Select the organization your app belongs to
+      and at the top you'll see a text: **Build Secret**.
+      Click it and the Build Secret will appear.
+    is_required: true
+    is_expand: false
+  -
+    mapped_to: STEP_CRASHLYTICS_IPA_PATH
+    title: "IPA file path"
+    is_expand: true
+    is_required: true
+    value: "$BITRISE_IPA_PATH"
+    is_dont_change_value: true
+  - 
+    mapped_to: STEP_CRASHLYTICS_EMAIL_LIST
+    title: "Notify: Emails"
+    description: |
+      Optional list of individual addresses (comma-separated)﻿
+    is_expand: false
+    is_required: false
+  - 
+    mapped_to: STEP_CRASHLYTICS_GROUP_ALIASES_LIST
+    title: "Notify: Group Aliases"
+    description: |
+      Optional list of group aliases from web dashboard (comma-separated)
+    is_expand: false
+    is_required: false
+  -
+    mapped_to: STEP_CRASHLYTICS_RELEASE_NOTES
+    title: "Release Notes"
+    is_expand: false
+    is_required: false
+    value: "Automatic build with Bitrise.io"
+  -
+    mapped_to: STEP_CERT_ACTIVATOR_CERTIFICATE_URL
+    title: "Certificate Private Key file URL"
+    description: |
+      .p12 Private Key file's URL
+    is_required: true
+    is_expand: true
+    value: "$BITRISE_CERTIFICATE_URL"
+    is_dont_change_value: true
+  -
+    mapped_to: STEP_CERT_ACTIVATOR_CERTIFICATE_PASSPHRASE
+    title: "Certificate Private Key file Passphrase"
+    description: |
+      .p12 Private Key file's Passphrase
+    is_required: false
+    is_expand: true
+    value: "$BITRISE_CERTIFICATE_PASSPHRASE"
+    is_dont_change_value: true
+  -
+    mapped_to: STEP_CERT_ACTIVATOR_CERTIFICATES_DIR
+    title: "Certificates Directory Path"
+    description: |
+      Directory where this step stores the Certificate Private Key (.p12).
+    value: "${HOME}/bitrise_fabric_deploy_certs"
+    is_expand: true
+    is_required: true
+    is_dont_change_value: true
+  -
+    mapped_to: STEP_CERT_ACTIVATOR_KEYCHAIN_PATH
+    title: "Keychain Path"
+    value: "${HOME}/Library/Keychains/bitrise_fabric_deploy.keychain"
+    is_expand: true
+    is_required: true
+    is_dont_change_value: true
+  -
+    mapped_to: STEP_CERT_ACTIVATOR_KEYCHAIN_PSW
+    title: "Keychain Password / passphrase"
+    is_expand: false
+    is_required: true
+    value: "bitrise"
+    is_dont_change_value: true
+outputs: []
