@@ -1,0 +1,50 @@
+name: "Bitrise iOS App Deploy"
+description: |
+  Bitrise iOS App (.ipa) Deploy.
+website: https://github.com/bitrise-io/steps-bitrise-ios-deploy
+fork_url: https://github.com/bitrise-io/steps-bitrise-ios-deploy
+source:
+  git: https://github.com/bitrise-io/steps-bitrise-ios-deploy.git
+host_os_tags:
+  - "osx-10.10"
+project_type_tags: []
+type_tags:
+  - "deploy"
+is_requires_admin_user: false
+inputs:
+  - 
+    mapped_to: STEPLIB_FORMATTED_OUTPUT_FILE_PATH
+    title: "Formatted Output File Path"
+    description: |
+      If provided this Step will generate a (markdown)
+      formatted output to this path.
+    is_required: false
+    is_expand: true
+    value: "$BITRISE_STEP_FORMATTED_OUTPUT_FILE_PATH"
+    is_dont_change_value: true
+  - 
+    mapped_to: STEP_BITRISE_IOS_DEPLOY_BUILD_URL
+    title: "Bitrise Build URL"
+    description: |
+      Unique build URL of this build on Bitrise.io
+    is_required: true
+    is_expand: true
+    value: "$BITRISE_BUILD_URL"
+    is_dont_change_value: true
+  - 
+    mapped_to: STEP_BITRISE_IOS_DEPLOY_API_TOKEN
+    title: "Bitrise Build API Token"
+    description: |
+      The build's API Token for the build on Bitrise.io
+    is_required: true
+    is_expand: true
+    value: "$BITRISE_BUILD_API_TOKEN"
+    is_dont_change_value: true
+  - 
+    mapped_to: STEP_BITRISE_IOS_DEPLOY_IPA_PATH
+    title: "IPA file path"
+    is_required: true
+    is_expand: true
+    value: "$BITRISE_IPA_PATH"
+    is_dont_change_value: true
+outputs: []
