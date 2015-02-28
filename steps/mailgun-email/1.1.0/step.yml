@@ -1,4 +1,4 @@
-name: Send Email with Mailgun
+name: "Send Email with Mailgun"
 description: |
   Send email with Mailgun ( [https://mailgun.com](https://mailgun.com) ).
 
@@ -8,29 +8,40 @@ source:
   git: https://github.com/bitrise-io/steps-email-with-mailgun.git
 host_os_tags:
   - osx-10.9
+  - osx-10.10
 type_tags:
   - email
   - messaging
+  - notification
 is_requires_admin_user: false
-
 inputs:
   -
-    title: |
-      Mailgun API Key
     mapped_to: MAILGUN_API_KEY
+    title: "Mailgun API Key"
+    is_expand: false
+    is_required: true
   -
-    title: |
-      Mailgun Domain
     mapped_to: MAILGUN_DOMAIN
+    title: "Mailgun Domain"
+    is_expand: false
+    is_required: true
   -
-    title: |
-      Send To emails (comma separated email address list)
     mapped_to: MAILGUN_SEND_TO
+    title: "Send To emails"
+    description: |
+      Comma separated email address list.
+    is_expand: false
+    is_required: true
   -
-    title: |
-      Email Subject
     mapped_to: MAILGUN_EMAIL_SUBJECT
+    title: "Email Subject"
+    is_expand: false
+    is_required: true
   -
-    title: |
-      Email Message (can be HTML)
     mapped_to: MAILGUN_EMAIL_MESSAGE
+    title: "Email Message"
+    description: |
+      The message can be HTML.
+    is_expand: true
+    is_required: true
+    value: "Build finished on Bitrise.io"
