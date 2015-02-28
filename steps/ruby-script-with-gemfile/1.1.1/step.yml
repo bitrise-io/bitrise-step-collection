@@ -6,19 +6,21 @@ source:
   git: https://github.com/bitrise-io/steps-ruby-script.git
 host_os_tags:
   - osx-10.9
+  - osx-10.10
 type_tags:
+  - script
   - ruby
   - runner
-  - script
   - glue
 is_requires_admin_user: true
-
 inputs:
-  - title: |
-      Gemfile's content
+  - 
     mapped_to: GEMFILE_CONTENT
+    title: "Gemfile's content"
     is_expand: false
-  - title: |
-      The Ruby script
+    is_required: false
+  - 
     mapped_to: __INPUT_FILE__
+    title: "The Ruby script"
     is_expand: false
+    is_required: true

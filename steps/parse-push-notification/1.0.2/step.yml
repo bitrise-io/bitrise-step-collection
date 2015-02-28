@@ -1,5 +1,5 @@
 ---
-name: Send Push Notification with Parse
+name: "Send Push Notification with Parse"
 description: |
   Send a push notification with [Parse](https://parse.com/).
 
@@ -16,17 +16,27 @@ source:
   git: https://github.com/bitrise-io/steps-push-notification-with-parse.git
 host_os_tags:
   - osx-10.9
+  - osx-10.10
 type_tags:
-  - push notification
+  - "push notification"
+  - "notification"
 is_requires_admin_user: false
-
 inputs:
-  - title: |
-      Parse App ID
+  - 
     mapped_to: PARSE_PUSH_APP_ID
-  - title: |
-      Parse REST API Key
+    title: "Parse App ID"
+    is_expand: false
+    is_required: true
+  -
     mapped_to: PARSE_PUSH_REST_KEY
-  - title: |
-      The text of the push message (optional, default is "Automatic build with Bitrise.")
+    title: "Parse REST API Key"
+    is_expand: false
+    is_required: true
+  - 
     mapped_to: PARSE_PUSH_MESSAGE
+    title: "Message"
+    description: |
+      The text of the push message.
+    is_expand: true
+    is_required: true
+    value: "${BITRISE_APP_TITLE} new build available on Bitrise.io"
