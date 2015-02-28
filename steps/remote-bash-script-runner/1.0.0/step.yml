@@ -1,4 +1,4 @@
-name: Remote Bash Script Runner
+name: "Remote Bash Script Runner"
 description: |
   Downloads the content of the input url and runs it as a bash script.
   For example you can provide a GitHub Gist *raw* url.
@@ -7,12 +7,17 @@ source:
   git: https://github.com/bitrise-io/steps-remote-script-runner.git
 host_os_tags:
   - osx-10.9
+  - osx-10.10
 type_tags:
+  - script
   - bash
   - runner
 is_requires_admin_user: true
-
 inputs:
-  - title: |
-      Bash Script URL which returns a *text* response (not an HTML one!)
+  -
     mapped_to: DOWNLOAD_SCRIPT_URL
+    title: "Script URL"
+    description: |
+      Bash Script URL which returns a *text* response (not an HTML one!)
+    is_expand: false
+    is_required: true
