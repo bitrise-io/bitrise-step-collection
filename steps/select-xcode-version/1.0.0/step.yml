@@ -1,0 +1,42 @@
+name: "Select Xcode version"
+description: |
+  Selects / activates the specified Xcode version.
+  
+  For available "version channel" identifiers and exact version numbers
+  see the [Virtual Machine pre-installed tools](http://devcenter.bitrise.io/docs/virtual-machine-updates.html#technical-notes)
+  article on our [DevCenter](http://devcenter.bitrise.io).
+
+  Technical note: on Bitrise OS X Virtual Machines the pre-installed Xcode
+  versions are located at `/Applications/Xcodes`.
+website: https://github.com/bitrise-io/steps-select-xcode-version
+fork_url: https://github.com/bitrise-io/steps-select-xcode-version
+source:
+  git: https://github.com/bitrise-io/steps-select-xcode-version.git
+host_os_tags:
+  - "osx-10.10"
+project_type_tags: ["ios"]
+type_tags:
+  - "build"
+is_requires_admin_user: true
+inputs:
+  - 
+    mapped_to: SELECT_XCODE_VERSION_CHANNEL_ID
+    title: "Xcode version channel ID"
+    description: |
+      A version channel identifies a pre-installed Xcode version
+      based on the version's current *stability*.
+
+      For example the `-stable` channel refers to the latest
+      *stable* release version of Xcode which is installed on the Virtual Machine.
+      Similarly the `-beta` channel refers to the latest
+      *beta* version of Xcode pre-installed on the Virtual Machine.
+
+      For available "version channel" identifiers and exact version numbers
+      see the [Virtual Machine pre-installed tools](http://devcenter.bitrise.io/docs/virtual-machine-updates.html#technical-notes)
+      article on our [DevCenter](http://devcenter.bitrise.io).
+    is_required: true
+    is_expand: false
+    value: "-stable"
+    value_options: ["-stable", "-beta"]
+    is_dont_change_value: false
+outputs: []
