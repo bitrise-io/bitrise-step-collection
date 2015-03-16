@@ -1,0 +1,85 @@
+name: "Deploy to iTunes Connect (with Shenzhen)"
+description: |
+  Deploy to iTunes Connect, using the
+  fantastic [Shenzhen](https://github.com/nomad/shenzhen)
+  Ruby gem.
+
+  ## Setup guide and notes
+
+  * Register an app on iTunes Connect, on the **My Apps** page. Click on the *plus sign* and select the **New iOS App** option. This requires an **admin** account.
+  * Requires an **App Store iOS distibution Provisioning Profile**
+  * The app's Xcode project have to contain an *entitlements* file for the Target
+  * Every build which you want to push to iTunes Connect have to have a **unique build and version number** pair (*increment either or both before a new deploy to iTunes Connect*)
+
+  ## Example entitlements file
+
+  The entitlements file is usually located in the *target's folder*,
+  with the name *YOUR-TARGET-NAME.entitlements*.
+  It also have to be set in Xcode project settings:
+  in `Target > Build Settings` set the key **Code Signing Entitlements** (`CODE_SIGN_ENTITLEMENTS`)
+  to the file's path (*relative to the Xcode project file*).
+  It's content have to
+  be something like this (both the `application-identifier` and the `beta-reports-active` are required):
+
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+      <plist version="1.0">
+      <dict>
+        <key>application-identifier</key>
+        <string>$(AppIdentifierPrefix)$(CFBundleIdentifier)</string>
+        <key>beta-reports-active</key>
+        <true/>
+      </dict>
+      </plist>
+website: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-shenzhen
+fork_url: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-shenzhen
+source:
+  git: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-shenzhen.git
+host_os_tags:
+  - "osx-10.10"
+project_type_tags: []
+type_tags:
+  - "deploy"
+is_requires_admin_user: false
+inputs:
+  -
+    mapped_to: STEP_SHENZHEN_DEPLOY_IPA_PATH
+    title: "IPA path"
+    description: |
+      Path of the IPA file, to be deployed to iTunes Connect
+    is_required: true
+    is_expand: true
+    value: "$BITRISE_IPA_PATH"
+    is_dont_change_value: true
+  -
+    mapped_to: STEP_SHENZHEN_DEPLOY_ITUNESCON_USER
+    title: "iTunes Connect - User Apple ID (email)"
+    description: |
+      Login Apple ID (email) for the iTunes Connect site.
+    is_required: true
+    is_expand: false
+    value: ""
+    is_dont_change_value: false
+  -
+    mapped_to: STEP_SHENZHEN_DEPLOY_ITUNESCON_PASSWORD
+    title: "iTunes Connect - Password"
+    description: |
+      Password for the specified User (for the Apple ID / email).
+    is_required: true
+    is_expand: false
+    value: ""
+    is_dont_change_value: false
+  -
+    mapped_to: STEP_SHENZHEN_DEPLOY_ITUNESCON_APP_ID
+    title: "iTunes Connect - App Apple ID"
+    description: |
+      The App's *Apple ID* on iTunes Connect.
+
+      Open the **App's page on iTunes Connect**,
+      click on **More**, click on *About this app*,
+      copy the *Apple ID*'s value from there (numeric, like 846814360)
+    is_required: true
+    is_expand: false
+    value: ""
+    is_dont_change_value: false
+outputs: []
