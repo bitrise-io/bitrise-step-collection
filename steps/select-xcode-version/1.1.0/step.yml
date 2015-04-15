@@ -1,0 +1,50 @@
+name: "Select Xcode version"
+description: |
+  Selects / activates the specified Xcode version.
+
+  For available "version channel" identifiers and exact version numbers
+  see the [Virtual Machine pre-installed tools](http://devcenter.bitrise.io/docs/virtual-machine-updates.html)
+  article on our [DevCenter](http://devcenter.bitrise.io).
+
+  Technical note: on Bitrise OS X Virtual Machines the pre-installed Xcode
+  versions are located at `/Applications/Xcodes`.
+website: https://github.com/bitrise-io/steps-select-xcode-version
+fork_url: https://github.com/bitrise-io/steps-select-xcode-version
+source:
+  git: https://github.com/bitrise-io/steps-select-xcode-version.git
+host_os_tags:
+  - "osx-10.10"
+project_type_tags: ["ios"]
+type_tags:
+  - "build"
+is_requires_admin_user: true
+inputs:
+  -
+    mapped_to: SELECT_XCODE_VERSION_CHANNEL_ID
+    title: "Xcode version channel ID"
+    description: |
+      A version channel identifies a pre-installed Xcode version
+      based on the version's current *stability*.
+
+      * `-stable`: refers to the latest *stable* release version of Xcode which is installed in the Virtual Machine.
+      * `-latest`: refers to the latest available Xcode version in the Virtual Machine. This can be a *beta* or a *stable* Xcode version (*stable* in case there's no beta version available).
+      * `-beta`: refers to the latest *beta* version of Xcode pre-installed in the Virtual Machine.
+
+      Generally you should *not* use the `-beta` channel as it will fail in case there's
+      no *beta* Xcode available on the Virtual Machine. This, however, can be used
+      in case you want to use the latest *beta* until it gets to a stable state,
+      so when this step fails you can most likely switch to the `-stable` channel.
+      In every other case, if you want to use the absolutely latest Xcode version
+      (which might be a beta) you should use the `-latest` channel, which will
+      not fail if there's no beta version available, but rather it will use
+      the latest installed stable version instead.
+
+      For available "version channel" identifiers and exact version numbers
+      see the [Virtual Machine pre-installed tools](http://devcenter.bitrise.io/docs/virtual-machine-updates.html)
+      article on our [DevCenter](http://devcenter.bitrise.io).
+    is_required: true
+    is_expand: false
+    value: "-stable"
+    value_options: ["-stable", "-latest", "-beta"]
+    is_dont_change_value: false
+outputs: []
