@@ -45,7 +45,7 @@ inputs:
     is_required: true
     is_expand: true
     value: "$BITRISE_SCHEME"
-    is_dont_change_value: true
+    is_dont_change_value: false
   - 
     mapped_to: XCODE_BUILDER_ACTION
     title: "Xcode Action"
