@@ -10,3 +10,6 @@ PLATFORMS
 DEPENDENCIES
   safe_yaml
   steplib
+
+BUNDLED WITH
+   1.10.5
