@@ -3,7 +3,7 @@ description: Downloads and installs the certificate and the mobile provisioning 
 website: https://github.com/bitrise-io/steps-certificate-and-profile-installer
 fork_url: https://github.com/bitrise-io/steps-certificate-and-profile-installer
 source:
-  git: https://github.com/bitrise-io/steps-certificate-and-profile-installer
+  git: https://github.com/bitrise-io/steps-certificate-and-profile-installer.git
 host_os_tags:
   - "osx-10.10"
 project_type_tags:
